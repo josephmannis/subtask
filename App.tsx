@@ -7,7 +7,7 @@ export default function App() {
   return (
     <Content>
       <StatusBar style='dark' />
-      <Task/>
+      <Task task={{id: 'hi', name: 'Example', completed: false, children: []}}/>
     </Content>
   );
 }
