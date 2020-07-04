@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
     "@types/styled-components": "^5.1.0",
     "expo": "~38.0.1",
     "expo-linear-gradient": "~8.2.1",
