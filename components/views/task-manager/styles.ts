@@ -14,3 +14,12 @@ export const TaskFilter = styled.TextInput`
     background-color: #E8E8E8;
     border-radius: 7px;
 `
+
+export const ChildTask = styled.View`
+    margin-bottom: 16px;
+`
+
+export const TaskList = styled.FlatList`
+    overflow: visible;
+    margin-top: 24px;
+`

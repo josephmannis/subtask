@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskName } from './styles';
-import { View, Text, AsyncStorage } from 'react-native';
+import { TaskName, ChildTask, TaskList } from './styles';
+import { View, FlatList } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
@@ -26,9 +26,13 @@ const TaskManager: React.FC = () => {
             </TaskName>
 
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)}/>
-            { childTasks.map((t, i) => {
-                return <TaskCard key={i} name={t.name} description='test' completion={10}/>
-            })}
+            <TaskList data={childTasks} keyExtractor={t => t.id} renderItem={t => {
+                return (
+                    <ChildTask>
+                        <TaskCard name={t.item.name} description='test' completion={10}/>
+                    </ChildTask>
+                )
+            }}/>
         </View>
     )
 }
