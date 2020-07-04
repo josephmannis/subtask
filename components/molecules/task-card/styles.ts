@@ -4,7 +4,7 @@ export const Content = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 22px;
+    padding: 8px;
 `
 
 export const Information = styled.View`
@@ -22,9 +22,4 @@ export const Name = styled.Text`
 export const Description = styled.Text`
     font-size: 18px;
     color: #20A3FF;
-`
-
-export const CompletedLabel = styled.Text`
-    font-size: 20px;
-    font-weight: bold;
 `

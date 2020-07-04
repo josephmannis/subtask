@@ -1,33 +1,47 @@
 
 import React from 'react';
-// import { IconImage } from './styles';
 const searchIcon = require('../../../assets/ic_search.png');
-import { Image } from 'react-native';
+const checkIcon = require('../../../assets/ic_check.png')
 import styled from 'styled-components/native';
 
-type IconType = 'search';
+type IconType = 'search' | 'check';
+type IconSize = 'small';
 
 interface IIconProps {
     type: IconType;
+    size: IconSize;
 }
 
 const mapTypeToIcon = (type: IconType) => {
     switch(type) {
         case 'search':
             return searchIcon
+        case 'check':
+            return checkIcon
     }
 }
 
-const IconImage = styled.Image`
-    height: 100%;
+const mapSize = (size: IconSize) => {
+    switch(size) {
+        case 'small':
+            return '20px'
+    }
+}
+
+interface ImageProps {
+    size: IconSize;
+}
+
+const IconImage = styled.Image<ImageProps>`
+    height: ${({size}) => mapSize(size)};
+    width: ${({size}) => mapSize(size)};
+    aspect-ratio: 1;
     resize-mode: contain;
-    width: 5%;
-    
 `
 
-const Icon: React.FC<IIconProps> = ({type}) => {
+const Icon: React.FC<IIconProps> = ({type, size}) => {
     return (
-        <IconImage source={mapTypeToIcon(type)}/>
+        <IconImage source={mapTypeToIcon(type)} size={size}/>
     )
 }
 

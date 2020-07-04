@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../../atoms/card/Card';
-import { Description, Name, Information, Content, CompletedLabel } from './styles';
+import { Description, Name, Information, Content } from './styles';
 import CompletionChart from '../completion-chart/CompletionChart';
 
 interface ITaskCardProps {
@@ -14,9 +14,6 @@ const TaskCard: React.FC<ITaskCardProps> = ({name, description, completion}) => 
         <Card>
             <Content>
                 <CompletionChart percentCompleted={completion}/>
-                {/* <CompletedLabel>
-                    {`${completion}%`}
-                </CompletedLabel> */}
                 <Information>
                     <Name>
                         {name}

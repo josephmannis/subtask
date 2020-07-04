@@ -1,44 +1,66 @@
 import React from 'react';
-import {PieChart} from 'react-native-chart-kit';
+import {PieChart } from 'react-native-chart-kit';
+import { ChartWrapper, CompletedCircle, CompletedText, CompletedIcon } from './styles';
+import Icon from '../../atoms/icon/Icon';
 
 
 interface ICompletionChartProps {
     percentCompleted: number;
 }
 
-const CompletionChart: React.FC<ICompletionChartProps> = props => {
-    const chartConfig = {
-        backgroundColor: '#FFFFFF',
-        backgroundGradientFrom: '#fb8c00',
-        backgroundGradientTo: '#ffa726',
-        decimalPlaces: 2, // optional, defaults to 2dp
-        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        style: {
-            borderRadius: 16
-        }
+const CompletionChart: React.FC<ICompletionChartProps> = ({percentCompleted}) => {
+    const getCompleted = () => {
+        return percentCompleted < 0 ? 0 : Math.floor(percentCompleted);
     }
 
-    const getData = (percentComplete: number) => {
+    const getData = () => {
+        let complete = getCompleted()
+
         return [
             { 
-                name: 'Completed', 
-                completed: percentComplete, 
+                completed: complete, 
                 color: '#20A3FF', 
-                legendFontColor: '#7F7F7F', 
-                legendFontSize: 15 
+            },
+            { 
+                completed: 100 - complete, 
+                color: '#F8F8F8',
             }
         ]
     }
 
+    const getCompletedLabelContents = () => {   
+        let complete = getCompleted()
+     
+        switch(complete) {
+            case 100:
+                return (<Icon type='check' size='small'/>)
+            case 0:
+                return
+            default:
+                return (
+                    <CompletedText>
+                        {`${complete}%`} 
+                    </CompletedText>
+                )
+        }
+    }
+
     return (
-       <PieChart 
-            width={50}
-            height={50}
-            data={getData(props.percentCompleted)}
-            accessor="Completed"
-            backgroundColor="white"
-            paddingLeft="15"
-       />
+        <ChartWrapper>
+            <PieChart
+                data={getData()}
+                width={100} // from react-native
+                height={100}
+                accessor="completed"
+                hasLegend={false}
+                paddingLeft={25}
+                
+                chartConfig={{color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`}}
+            />
+            <CompletedCircle>
+                { getCompletedLabelContents() }
+            </CompletedCircle>        
+        </ChartWrapper>
     )
 }
 
