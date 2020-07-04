@@ -8,6 +8,7 @@ export const SearchGroup = styled.View`
     border-bottom-right-radius: 7px;
     padding-left: 12px;
     border-radius: 7px;
+    align-items: center;
 `
 
 export const SearchInput = styled.TextInput`

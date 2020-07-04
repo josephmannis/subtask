@@ -12,7 +12,7 @@ interface ISearchBarProps {
 const SearchBar: React.FC<ISearchBarProps> = ({value, onChange, placeholder}) => {
     return (
         <SearchGroup>
-            <Icon type='search'/>
+            <Icon type='search' size='small'/>
             <SearchInput value={value} placeholder={placeholder ? placeholder : 'Type to search...'} onChangeText={onChange}/>
         </SearchGroup>
     )
