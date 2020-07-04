@@ -15,7 +15,7 @@ export const TaskFilter = styled.TextInput`
     border-radius: 7px;
 `
 
-export const ChildTask = styled.View`
+export const ChildTask = styled.TouchableHighlight`
     margin-bottom: 16px;
 `
 

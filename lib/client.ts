@@ -3,5 +3,4 @@ export interface ITask {
     parentId?: string; // ID of parent
     name: string; // Name of task
     percentCompleted: number; // Completed or not
-    children: string[]; // Children IDs
 }
