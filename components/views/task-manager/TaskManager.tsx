@@ -14,6 +14,9 @@ const TaskManager: React.FC = () => {
 
     React.useEffect(() => {
         let storage = getStorage();
+        storage.saveTask({name: 'Test', id: 'testid', percentCompleted: 10})
+        storage.saveTask({name: 'Child test', id: 'testidchild', parentId: 'testid', percentCompleted: 0})
+        storage.saveTask({name: 'Child test2', id: 'testidchild2', parentId: 'testid', percentCompleted: 30})
 
         storage.getTopLevelTasks()
         .then(tasks => setChildren(tasks))
@@ -25,8 +28,17 @@ const TaskManager: React.FC = () => {
         let task = await storage.getTask(id);
         if (task) {
             let children = await storage.getChildren(task);
-            setChildren(children)
-            setTask(task)
+            if (children.length === 0) {
+                /*
+                    - if a task has no children and its completed, its incomplete and update parent
+                    - if a task has no children and its not completed, its complete and update parent
+                    - if a task has children, go into its children
+                */
+                await storage.saveTask({...task, percentCompleted: 100});
+            } else {
+                setChildren(children)
+                setTask(task)
+            }
         }
     }
 
