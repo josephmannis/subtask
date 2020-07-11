@@ -1,6 +1,6 @@
 import React from 'react';
 import { TaskName, ChildTask, TaskList } from './styles';
-import { View, AsyncStorage } from 'react-native';
+import { View } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
@@ -13,34 +13,35 @@ const TaskManager: React.FC = () => {
     const [ history, setHistory ] = React.useState<ITask[]>([]);
 
     React.useEffect(() => {
-        let storage = getStorage();
-        storage.saveTask({name: 'Test', id: 'testid', percentCompleted: 10})
-        storage.saveTask({name: 'Child test', id: 'testidchild', parentId: 'testid', percentCompleted: 0})
-        storage.saveTask({name: 'Child test2', id: 'testidchild2', parentId: 'testid', percentCompleted: 30})
+        async function setupTasks() {
+            let storage = getStorage();
+            storage.init().then(() => {
+                storage.getTopLevelTasks()
+                .then(tasks => setChildren(tasks))
+                .catch(err => console.log(err))
+            });
+        }
 
-        storage.getTopLevelTasks()
-        .then(tasks => setChildren(tasks))
-        .catch(err => console.log(err))
+        setupTasks();
     }, [])
 
-    const setVisibleTask = async (id: string) => {
+    const taskPressed = async (id: string) => {
         let storage = getStorage();
         let task = await storage.getTask(id);
         if (task) {
-            let children = await storage.getChildren(task);
+            let children = await storage.getChildren(task.id);
             if (children.length === 0) {
-                /*
-                    - if a task has no children and its completed, its incomplete and update parent
-                    - if a task has no children and its not completed, its complete and update parent
-                    - if a task has children, go into its children
-                */
-                await storage.saveTask({...task, percentCompleted: 100});
+                storage.toggleTask(id)
+                .then(task => {setChildren(childTasks.map(t => t.id === task.id ? task : t))})
+                .catch(err => console.log(err))
             } else {
                 setChildren(children)
                 setTask(task)
             }
         }
     }
+
+    const getDescription = (numChildren: number) => `${ numChildren === 0 ? 'No' : numChildren} subtasks`
 
     return (
         <View>
@@ -51,8 +52,8 @@ const TaskManager: React.FC = () => {
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)}/>
             <TaskList data={childTasks} keyExtractor={t => t.id} renderItem={t => {
                 return (
-                    <ChildTask onPress={() => setVisibleTask(t.item.id)}>
-                        <TaskCard name={t.item.name} description='test' completion={t.item.percentCompleted}/>
+                    <ChildTask onPress={() => taskPressed(t.item.id)}>
+                        <TaskCard name={t.item.name} description={getDescription(t.item.children.length)} completion={t.item.percentCompleted}/>
                     </ChildTask>
                 )
             }}/>

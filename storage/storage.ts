@@ -5,17 +5,29 @@ import { IPersistedTask } from "../lib/api";
 interface ITaskStorage {
     getTopLevelTasks: () => Promise<ITask[]>;
     getTask: (id: string) => Promise<ITask>;
-    getChildren: (ask: ITask) => Promise<ITask[]>;
-    saveTask: (task: ITask) => Promise<ITask>;
+    getChildren: (id: string) => Promise<ITask[]>;
+    toggleTask: (id: string) => Promise<ITask>;
+    init(): Promise<void>;
 }
+// Add task fragment, so automatically resolve one level deep
+// Or maybe we just get the whole ass thing once, and then just move around on the in-memory tree?
 
 export default function getStorage(): ITaskStorage {
     return {
         getTopLevelTasks: getTopLevelTasks,
-        saveTask: saveTask,
         getTask: getTask,
-        getChildren: getChildren
+        getChildren: getChildren,
+        init: init,
+        toggleTask: toggleTask
     }
+}
+
+async function init(): Promise<void> {
+    await AsyncStorage.clear()
+    await save({name: 'Eggs', id: 'testidchild', parentId: 'testid', completed: false, children: []})
+    await save({name: 'Milk', id: 'testidchild2', parentId: 'testid', completed: true, children: []})
+    await save({name: 'Groceries', id: 'testid', completed: false, children: ['testidchild', 'testidchild2']})
+    await AsyncStorage.setItem('root', JSON.stringify(['testid']))
 }
 
 async function getTopLevelTasks(): Promise<ITask[]> {
@@ -27,13 +39,18 @@ async function getTopLevelTasks(): Promise<ITask[]> {
     return []
 }
 
-async function getTasks(ids: string[]): Promise<ITask[]> {
-    return await Promise.all(ids.map(id => getTask(id)))
-}
-
 async function getTask(id: string): Promise<ITask> {
     let task: IPersistedTask = await getPersisted(id);
     return resolveTask(task);
+}
+
+async function getChildren(id: string): Promise<ITask[]> {
+    let task: IPersistedTask = await getPersisted(id);
+    return getTasks(task.children);
+}
+
+async function getTasks(ids: string[]): Promise<ITask[]> {
+    return await Promise.all(ids.map(id => getTask(id)))
 }
 
 async function getPersisted(id: string): Promise<IPersistedTask> {
@@ -90,4 +107,8 @@ async function updateParent(id?: string): Promise<void> {
             await updateParent(persisted.parentId)
         }
     }
+}
+
+async function save(task: IPersistedTask): Promise<void> {
+    AsyncStorage.setItem(task.id, JSON.stringify(task))
 }

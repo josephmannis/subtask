@@ -5,12 +5,13 @@ import Icon from '../../atoms/icon/Icon';
 
 
 interface ICompletionChartProps {
+    // Number between  0 and 1
     percentCompleted: number;
 }
 
 const CompletionChart: React.FC<ICompletionChartProps> = ({percentCompleted}) => {
     const getCompleted = () => {
-        return percentCompleted < 0 ? 0 : Math.floor(percentCompleted);
+        return percentCompleted < 0 ? 0 : percentCompleted * 100;
     }
 
     const getData = () => {
