@@ -53,8 +53,8 @@ const TaskManager: React.FC = () => {
 
     const parentTaskPressed = (id: string) => {
         if (id === selectedTask?.id) return
-        let endHistory = history.findIndex(v => v.id === id) + 1
-        setHistory(history.slice(0, endHistory))
+        let historyItem = history.findIndex(v => v.id === id) + 1
+        setHistory(history.slice(0, historyItem))
     }
 
     const homePressed = () => {
