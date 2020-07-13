@@ -24,7 +24,9 @@ export const ChildTask = styled.TouchableHighlight`
 
 export const TaskList: StyleProp<ViewStyle> = {overflow: 'visible', marginTop: 32}
 
-export const History: StyleProp<ViewStyle> = {overflow: 'visible', marginBottom: 18}
+export const History: StyleProp<ViewStyle> = { overflow: 'visible', marginBottom: 18 }
+
+export const HistoryContent: StyleProp<ViewStyle> = {display: 'flex', alignItems: 'center'}
 
 export const HistoryHome = styled.View`
     display: flex;

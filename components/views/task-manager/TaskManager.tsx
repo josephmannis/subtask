@@ -1,5 +1,5 @@
 import React from 'react';
-import { TaskName, ChildTask, TaskList, History, HistoryHome } from './styles';
+import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent } from './styles';
 import { View, FlatList } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
@@ -27,28 +27,34 @@ const TaskManager: React.FC = () => {
         if (!selectedTask) fetchRoot();
     }, [])
 
-    const taskPressed = async (id: string) => {
+    React.useEffect(() => {
+        if (history.length === 0) return
+        let task = history[history.length - 1]
         let storage = getStorage();
-        let task = await storage.getTask(id);
-        if (task) {
-            let children = await storage.getChildren(task.id);
-            if (children.length === 0) {
-                storage.toggleTask(id)
-                .then(task => { setChildren(childTasks.map(t => t.id === task.id ? task : t)) })
-                .catch(err => console.log(err))
-            } else {
-                setHistory([...history, task])
-                console.log(history)
-                setChildren(children)
-                setTask(task)
+        storage.getChildren(task.id).then(children => {
+            setChildren(children)
+            setTask(task)
+        });
+    }, [history])
+
+    const taskPressed = (id: string) => {
+        let storage = getStorage();
+        storage.getTask(id).then(task => {
+            if (task) {
+                if (task.children.length === 0) {
+                    storage.toggleTask(task.id)
+                    .then(task => setChildren(childTasks.map(t => t.id === task.id ? task : t)))
+                } else {
+                    setHistory([...history, task])
+                }
             }
-        }
+        });
     }
 
     const parentTaskPressed = (id: string) => {
         if (id === selectedTask?.id) return
-        setHistory(history.slice(0, history.findIndex(v => v.id === id) - 1))
-        taskPressed(id)
+        let endHistory = history.findIndex(v => v.id === id) + 1
+        setHistory(history.slice(0, endHistory))
     }
 
     const homePressed = () => {
@@ -60,15 +66,15 @@ const TaskManager: React.FC = () => {
 
     return (
         <View>
-            <TaskName>
+            <TaskName editable={selectedTask !== undefined}>
                 {selectedTask ? selectedTask.name : 'Tasks'}
             </TaskName>
             { history.length !== 0 &&
                 <FlatList
                     horizontal data={history}
                     style={History}
-                    contentContainerStyle={{display: 'flex', alignItems: 'center'}}
-                    ItemSeparatorComponent={() => <View style={{alignSelf: 'center'}}><Divider/></View>}
+                    contentContainerStyle={HistoryContent}
+                    ItemSeparatorComponent={() => <Divider/>}
                     ListHeaderComponent={() =>  {
                         return (
                             <HistoryHome>
@@ -81,7 +87,6 @@ const TaskManager: React.FC = () => {
                 />
             }
 
-            
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)}/>
             
             <FlatList 
