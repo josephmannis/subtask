@@ -23,11 +23,13 @@ export default function getStorage(): ITaskStorage {
 }
 
 async function init(): Promise<void> {
-    await AsyncStorage.clear()
-    await save({name: 'Eggs', id: 'testidchild', parentId: 'testid', completed: false, children: []})
-    await save({name: 'Milk', id: 'testidchild2', parentId: 'testid', completed: true, children: []})
-    await save({name: 'Groceries', id: 'testid', completed: false, children: ['testidchild', 'testidchild2']})
-    await AsyncStorage.setItem('root', JSON.stringify(['testid']))
+    // await AsyncStorage.clear()
+    // await save({name: 'Eggs', id: 'Eggs', parentId: 'Dairy', completed: false, children: []})
+    // await save({name: 'Cheese', id: 'Cheese', parentId: 'Dairy', completed: false, children: []})
+    // await save({name: 'Dairy', id: 'Dairy', parentId: 'Groceries', completed: false, children: ['Cheese', 'Eggs']})
+    // await save({name: 'Lettuce', id: 'Lettuce', parentId: 'Groceries', completed: true, children: []})
+    // await save({name: 'Groceries', id: 'Groceries', completed: false, children: ['Lettuce', 'Dairy']})
+    // await AsyncStorage.setItem('root', JSON.stringify(['Groceries']))
 }
 
 async function getTopLevelTasks(): Promise<ITask[]> {

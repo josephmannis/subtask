@@ -1,4 +1,6 @@
 import styled from "styled-components/native";
+import { StyleProp, ViewStyle } from "react-native";
+import Icon from "../../atoms/icon/Icon";
 
 export const TaskName = styled.TextInput`
     font-size: 42px;
@@ -17,9 +19,18 @@ export const TaskFilter = styled.TextInput`
 
 export const ChildTask = styled.TouchableHighlight`
     margin-bottom: 16px;
+    border-radius: 14px;
 `
 
-export const TaskList = styled.FlatList`
-    overflow: visible;
-    margin-top: 24px;
+export const TaskList: StyleProp<ViewStyle> = {overflow: 'visible', marginTop: 32}
+
+export const History: StyleProp<ViewStyle> = { overflow: 'hidden', marginBottom: 10, paddingVertical: 24 }
+
+export const HistoryContent: StyleProp<ViewStyle> = {display: 'flex', alignItems: 'center'}
+
+export const HistoryHome = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
+
