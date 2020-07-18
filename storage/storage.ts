@@ -1,12 +1,16 @@
 import { ITask } from "../lib/client";
 import { AsyncStorage } from "react-native";
 import { IPersistedTask } from "../lib/api";
+import { nanoid } from 'nanoid/async/index'
+
+const ROOT_KEY = 'ROOTS'
 
 interface ITaskStorage {
     getTopLevelTasks: () => Promise<ITask[]>;
     getTask: (id: string) => Promise<ITask>;
     getChildren: (id: string) => Promise<ITask[]>;
     toggleTask: (id: string) => Promise<ITask>;
+    createTask: (name: string, parentId?: string) => Promise<ITask>
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
@@ -18,6 +22,7 @@ export default function getStorage(): ITaskStorage {
         getTask: getTask,
         getChildren: getChildren,
         init: init,
+        createTask: createTask,
         toggleTask: toggleTask
     }
 }
@@ -29,16 +34,18 @@ async function init(): Promise<void> {
     // await save({name: 'Dairy', id: 'Dairy', parentId: 'Groceries', completed: false, children: ['Cheese', 'Eggs']})
     // await save({name: 'Lettuce', id: 'Lettuce', parentId: 'Groceries', completed: true, children: []})
     // await save({name: 'Groceries', id: 'Groceries', completed: false, children: ['Lettuce', 'Dairy']})
-    // await AsyncStorage.setItem('root', JSON.stringify(['Groceries']))
+    // await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(['Groceries']))
 }
 
 async function getTopLevelTasks(): Promise<ITask[]> {
-    let roots = await AsyncStorage.getItem('root');
+    let roots = await AsyncStorage.getItem(ROOT_KEY);
     if (roots) {
         let parsed: string[] = JSON.parse(roots); // list of IDs
         return getTasks(parsed);
+    } else {
+        await AsyncStorage.setItem(ROOT_KEY, JSON.stringify([]));
+        return [];
     }
-    return []
 }
 
 async function getTask(id: string): Promise<ITask> {
@@ -108,6 +115,44 @@ async function updateParent(id?: string): Promise<void> {
             await AsyncStorage.setItem(persisted.id, JSON.stringify({...persisted, completed: isComplete}));
             await updateParent(persisted.parentId)
         }
+    }
+}
+
+async function createTask(name: string, parentId?: string): Promise<ITask> {
+    let task: IPersistedTask = {
+        id: await nanoid(),
+        name: name,
+        completed: false,
+        children: [],
+        parentId: parentId
+    }
+
+    await save(task)
+    
+    if (parentId) {
+        let persisted: IPersistedTask = await getPersisted(parentId);
+        persisted = {
+            ...persisted,
+            children: [...persisted.children, task.id]
+        }
+        await save(persisted)
+        await updateParent(parentId)
+    } else {
+        await addRoot(task.id)
+    }
+
+    return {
+        ...task,
+        percentCompleted: 0
+    }
+}
+
+async function addRoot(id: string): Promise<void> {
+    let roots = await AsyncStorage.getItem(ROOT_KEY);
+    if (roots) {
+        let parsed: string[] = JSON.parse(roots);
+        parsed = [...parsed, id]
+        await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(parsed))
     }
 }
 

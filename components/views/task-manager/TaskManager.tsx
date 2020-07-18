@@ -1,18 +1,22 @@
 import React from 'react';
-import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent } from './styles';
-import { View, FlatList } from 'react-native';
+import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent, Page } from './styles';
+import { FlatList } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
 import Tag from '../../atoms/tag/Tag';
 import TaskCard from '../../molecules/task-card/TaskCard';
 import Divider from '../../atoms/divider/Divider';
+import FloatingActionButton from '../../atoms/button/FloatingActionButton';
+import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 
 const TaskManager: React.FC = () => {
     const [ selectedTask, setTask ] = React.useState<ITask | undefined>()
     const [ childTasks, setChildren ] = React.useState<ITask[]>([]);
     const [ childQuery, setQuery ] = React.useState('');
     const [ history, setHistory ] = React.useState<ITask[]>([]);
+    const [ showCreation, toggleCreation ] = React.useState(false);
+    const taskList = React.useRef<FlatList>(null);
 
     const fetchRoot = async () => {
         let storage = getStorage();
@@ -64,13 +68,25 @@ const TaskManager: React.FC = () => {
 
     const getDescription = (numChildren: number) => `${ numChildren === 0 ? 'No' : numChildren} subtasks`
 
+    const onTaskCreated = (name: string) => {
+        let storage = getStorage();
+        toggleCreation(false);
+        storage.createTask(name, selectedTask?.id)
+        .then(task => setChildren([...childTasks, task]))
+        .catch(err => console.log(err))
+    }
+
     return (
-        <View>
+        <Page>
             <TaskName editable={selectedTask !== undefined}>
                 {selectedTask ? selectedTask.name : 'Tasks'}
             </TaskName>
             { history.length !== 0 &&
                 <FlatList
+                    ref={taskList}
+                    onContentSizeChange={() => {
+                       if (taskList.current) taskList.current.scrollToEnd({animated: true})
+                    }}
                     horizontal data={history}
                     style={History}
                     contentContainerStyle={HistoryContent}
@@ -93,12 +109,15 @@ const TaskManager: React.FC = () => {
                 style={TaskList}
                 data={childTasks} renderItem={({item}) => {
                 return (
-                    <ChildTask onPress={() => taskPressed(item.id)}>
+                    <ChildTask activeOpacity={0} underlayColor={'white'} onPress={() => taskPressed(item.id)}>
                         <TaskCard name={item.name} description={getDescription(item.children.length)} completion={item.percentCompleted}/>
                     </ChildTask>
                 )
             }}/>
-        </View>
+
+            <FloatingActionButton onPress={() => toggleCreation(true)}/>
+            <NewTaskModal show={showCreation} onSubmit={onTaskCreated} onCancel={() => toggleCreation(false)}/>
+        </Page>
     )
 }
 

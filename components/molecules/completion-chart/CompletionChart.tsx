@@ -11,7 +11,7 @@ interface ICompletionChartProps {
 
 const CompletionChart: React.FC<ICompletionChartProps> = ({percentCompleted}) => {
     const getCompleted = () => {
-        return percentCompleted < 0 ? 0 : percentCompleted * 100;
+        return percentCompleted < 0 ? 0 : Math.round(percentCompleted * 100);
     }
 
     const getData = () => {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { CircleButton } from './styles';
+import { CircleButton, ButtonWrapper } from './styles';
+import Icon from '../icon/Icon';
 
 interface FloatingActionButtonProps {
     onPress: () => void;
@@ -7,9 +8,11 @@ interface FloatingActionButtonProps {
 
 const FloatingActionButton: React.FC<FloatingActionButtonProps> = props => {
     return (
-        <CircleButton onPress={props.onPress}>
-            
-        </CircleButton>
+        <ButtonWrapper>
+            <CircleButton onPress={props.onPress}>
+                <Icon type='plus' size='small'/>
+            </CircleButton>
+        </ButtonWrapper>
     )
 }
 
