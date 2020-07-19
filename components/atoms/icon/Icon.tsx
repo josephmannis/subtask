@@ -3,10 +3,11 @@ import React from 'react';
 const searchIcon = require('../../../assets/ic_search.png');
 const checkIcon = require('../../../assets/ic_check.png')
 const arrowIcon = require('../../../assets/ic_arrow.png')
+const plusIcon = require('../../../assets/ic_plus.png')
 
 import styled from 'styled-components/native';
 
-type IconType = 'search' | 'check' | 'arrow';
+type IconType = 'search' | 'check' | 'arrow' | 'plus';
 type IconSize = 'small';
 
 interface IIconProps {
@@ -22,6 +23,8 @@ const mapTypeToIcon = (type: IconType) => {
             return checkIcon
         case 'arrow':
             return arrowIcon
+        case 'plus':
+            return plusIcon
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { SearchGroup, SearchInput } from './styles';
+import { SearchGroup } from './styles';
 import Icon from '../../atoms/icon/Icon';
+import { Input } from '../../atoms/input/TextInput';
 
 
 interface ISearchBarProps {
@@ -13,7 +14,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({value, onChange, placeholder}) =>
     return (
         <SearchGroup>
             <Icon type='search' size='small'/>
-            <SearchInput value={value} placeholder={placeholder ? placeholder : 'Type to search...'} onChangeText={onChange}/>
+            <Input value={value} placeholder={placeholder ? placeholder : 'Type to search...'} onChangeText={onChange}/>
         </SearchGroup>
     )
 }
