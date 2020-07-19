@@ -9,6 +9,7 @@ import TaskCard from '../../molecules/task-card/TaskCard';
 import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
+import Portal from '@burstware/react-native-portal';
 
 const TaskManager: React.FC = () => {
     const [ selectedTask, setTask ] = React.useState<ITask | undefined>()
@@ -114,8 +115,9 @@ const TaskManager: React.FC = () => {
                     </ChildTask>
                 )
             }}/>
-
-            <FloatingActionButton onPress={() => toggleCreation(true)}/>
+            <Portal>
+                <FloatingActionButton onPress={() => toggleCreation(true)}/>
+            </Portal>
             <NewTaskModal show={showCreation} onSubmit={onTaskCreated} onCancel={() => toggleCreation(false)}/>
         </Page>
     )

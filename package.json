@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@burstware/react-native-portal": "^1.0.2",
     "@react-native-community/async-storage": "^1.11.0",
     "@types/nanoid": "^2.1.0",
     "@types/react-native-modal": "^4.1.1",

@@ -9,6 +9,6 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "typeRoots": [ "./lib", "./node_modules/@types"],
-  "exclude": ["node_modules", "typings"]
+  "typeRoots": [ "./lib/", "./node_modules/@types"],
+  "exclude": ["node_modules", "./lib"]
 }

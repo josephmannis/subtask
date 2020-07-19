@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
 
 export const CircleButton = styled.TouchableOpacity`
     border-radius: 150px;
@@ -17,6 +16,6 @@ export const CircleButton = styled.TouchableOpacity`
 
 export const ButtonWrapper = styled.View`
     position: absolute;
-    right: 0;
-    bottom: ${`${Dimensions.get('screen').height}px`};
+    right: 30px;
+    bottom: 30px;
 `
