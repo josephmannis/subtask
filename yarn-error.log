@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/14.3.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @types/burstware__react-native-portal
+  /usr/local/Cellar/node/14.3.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @types/react-native-popup-menu
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/prince/.local/bin:/Users/prince/.local/bin:/usr/local/bin:/Users/prince/.local/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fburstware__react-native-portal: Not found
+  Error: https://registry.yarnpkg.com/@types%2freact-native-popup-menu: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
       at Request.emit (events.js:315:20)
@@ -52,6 +52,7 @@ npm manifest:
       "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
       "react-native-chart-kit": "^6.2.2",
       "react-native-modal": "^11.5.6",
+      "react-native-popup-menu": "^0.15.9",
       "react-native-svg": "12.1.0",
       "react-native-web": "~0.11.7",
       "styled-components": "^5.1.1"
@@ -4371,6 +4372,11 @@ Lockfile:
     dependencies:
       prop-types "^15.6.2"
       react-native-animatable "1.3.3"
+  
+  react-native-popup-menu@^0.15.9:
+    version "0.15.9"
+    resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.15.9.tgz#75bccf71ff4627cb302d871a28be84a91eb2f8d9"
+    integrity sha512-PO99dptMocEfUSS3SM7gY6UqophaBxizKjnZ7FcEwa+H4ONVxTk310/JCXJ9vdNunomgpxHluKRXnApfm9Md1w==
   
   react-native-safe-area-context@3.0.2:
     version "3.0.2"
