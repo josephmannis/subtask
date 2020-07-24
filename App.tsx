@@ -3,14 +3,17 @@ import React from 'react';
 import TaskManager from './components/views/task-manager/TaskManager';
 import Content from './components/templates/content/Content';
 import Portal from '@burstware/react-native-portal';
+import { MenuProvider } from 'react-native-popup-menu';
 
 export default function App() {
   return (
-    <Content>
+    <MenuProvider>
       <Portal.Host>
-        <StatusBar style='dark' />
-        <TaskManager/>
+        <Content>
+            <StatusBar style='dark' />
+            <TaskManager/>
+        </Content>
       </Portal.Host>
-    </Content>
+    </MenuProvider>
   );
 }

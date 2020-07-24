@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent, Page } from './styles';
-import { FlatList } from 'react-native';
+import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent, Page, TaskArea } from './styles';
+import { FlatList, SafeAreaView, View } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
@@ -10,6 +10,8 @@ import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 import Portal from '@burstware/react-native-portal';
+import { PopupMenuOption } from '../../molecules/popup-menu/PopupMenu';
+
 
 const TaskManager: React.FC = () => {
     const [ selectedTask, setTask ] = React.useState<ITask | undefined>()
@@ -77,6 +79,12 @@ const TaskManager: React.FC = () => {
         .catch(err => console.log(err))
     }
 
+    const onTaskDeleted = (id: string) => {
+        let storage = getStorage();
+        storage.deleteTask(id)
+        .then(() => setChildren(childTasks.filter(t => t.id !== id)))
+    }
+
     return (
         <Page>
             <TaskName editable={selectedTask !== undefined}>
@@ -106,15 +114,22 @@ const TaskManager: React.FC = () => {
 
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)}/>
             
-            <FlatList 
-                style={TaskList}
-                data={childTasks} renderItem={({item}) => {
-                return (
-                    <ChildTask activeOpacity={0} underlayColor={'white'} onPress={() => taskPressed(item.id)}>
-                        <TaskCard name={item.name} description={getDescription(item.children.length)} completion={item.percentCompleted}/>
-                    </ChildTask>
-                )
-            }}/>
+            <TaskArea>
+                <FlatList 
+                    style={TaskList}
+                    data={childTasks} renderItem={({item}) => {
+                        return (
+                            <ChildTask activeOpacity={0} underlayColor={'white'} onPress={() => taskPressed(item.id)}>
+                            <TaskCard 
+                                name={item.name}
+                                description={getDescription(item.children.length)} 
+                                completion={item.percentCompleted}
+                                onDeleted={() => onTaskDeleted(item.id)}    
+                            />
+                        </ChildTask>
+                    )
+                }}/>
+            </TaskArea>
             <Portal>
                 <FloatingActionButton onPress={() => toggleCreation(true)}/>
             </Portal>

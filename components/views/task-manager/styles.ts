@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { StyleProp, ViewStyle } from "react-native";
 
 export const Page = styled.View`
-    /* height: 100%; */
+    flex: 1;
 `
 
 export const TaskName = styled.TextInput`
@@ -26,9 +26,13 @@ export const ChildTask = styled.TouchableHighlight`
     padding: 0 24px;
 `
 
-export const TaskList: StyleProp<ViewStyle> = {overflow: 'hidden', paddingVertical: 24, marginVertical: 12, marginHorizontal: -24}
+export const TaskArea = styled.SafeAreaView`
+    flex: 5;
+`
 
-export const History: StyleProp<ViewStyle> = { overflow: 'hidden', marginBottom: 10 }
+export const TaskList: StyleProp<ViewStyle> = { paddingVertical: 24, marginVertical: 12, marginHorizontal: -24}
+
+export const History: StyleProp<ViewStyle> = { flex: 2, overflow: 'hidden', marginBottom: 10 }
 
 export const HistoryContent: StyleProp<ViewStyle> = {display: 'flex', alignItems: 'center', marginVertical: 24}
 

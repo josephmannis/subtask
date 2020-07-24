@@ -11,6 +11,7 @@ interface ITaskStorage {
     getChildren: (id: string) => Promise<ITask[]>;
     toggleTask: (id: string) => Promise<ITask>;
     createTask: (name: string, parentId?: string) => Promise<ITask>
+    deleteTask: (id: string) => Promise<void>;
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
@@ -23,7 +24,8 @@ export default function getStorage(): ITaskStorage {
         getChildren: getChildren,
         init: init,
         createTask: createTask,
-        toggleTask: toggleTask
+        toggleTask: toggleTask,
+        deleteTask: deleteTask
     }
 }
 
@@ -38,14 +40,23 @@ async function init(): Promise<void> {
 }
 
 async function getTopLevelTasks(): Promise<ITask[]> {
+    let roots = await getRoots();
+    return getTasks(roots);
+}
+
+async function getRoots(): Promise<string[]> {
     let roots = await AsyncStorage.getItem(ROOT_KEY);
     if (roots) {
-        let parsed: string[] = JSON.parse(roots); // list of IDs
-        return getTasks(parsed);
+        return JSON.parse(roots); // list of IDs
     } else {
         await AsyncStorage.setItem(ROOT_KEY, JSON.stringify([]));
         return [];
     }
+}
+
+async function setRoots(ids: string[]): Promise<string[]> {
+    await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(ids));
+    return ids;
 }
 
 async function getTask(id: string): Promise<ITask> {
@@ -116,6 +127,26 @@ async function updateParent(id?: string): Promise<void> {
             await updateParent(persisted.parentId)
         }
     }
+}
+
+async function deleteTask(id: string): Promise<void> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    await setRoots((await getRoots()).filter(rootId => rootId !== id))
+
+    if (persisted.parentId) {
+        let parent: IPersistedTask = await getPersisted(persisted.parentId);
+        await save({...parent, children: parent.children.filter(t => t !== id)})
+    }
+    
+    updateParent(persisted.parentId)
+
+    await deleteChildren(id);
+}
+
+async function deleteChildren(id: string): Promise<void> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    await AsyncStorage.removeItem(persisted.id);
+    await Promise.all(persisted.children.map(c => deleteChildren(c)))
 }
 
 async function createTask(name: string, parentId?: string): Promise<ITask> {

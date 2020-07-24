@@ -4,13 +4,23 @@ export const Content = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 8px;
+`
+
+export const InformationWrapper = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex: 2;
+    padding: 0 8px;
+
 `
 
 export const Information = styled.View`
     display: flex;
     flex-direction: column;
-    margin-left: 22px;
 `
 
 export const Name = styled.Text`
