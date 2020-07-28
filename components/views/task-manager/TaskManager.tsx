@@ -1,6 +1,6 @@
 import React from 'react';
 import { TaskName, TaskList, History, HistoryHome, HistoryContent, Page, TaskArea, ChildTask } from './styles';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
@@ -47,11 +47,8 @@ const TaskManager: React.FC = () => {
         let storage = getStorage();
         storage.getTask(id).then(task => {
             if (task) {
-                // if (task.children.length === 0) {
-                    storage.toggleTask(task.id)
-                    .then(task => setChildren(childTasks.map(t => t.id === task.id ? task : t)))
-                // } else {
-                // }
+                storage.toggleTask(task.id)
+                .then(task => setChildren(childTasks.map(t => t.id === task.id ? task : t)))
             }
         });
     }
