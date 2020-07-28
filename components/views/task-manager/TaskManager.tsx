@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskName, ChildTask, TaskList, History, HistoryHome, HistoryContent, Page, TaskArea } from './styles';
-import { FlatList, SafeAreaView, View } from 'react-native';
+import { TaskName, TaskList, History, HistoryHome, HistoryContent, Page, TaskArea, ChildTask } from './styles';
+import { FlatList } from 'react-native';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITask } from '../../../lib/client';
 import getStorage from '../../../storage/storage';
@@ -10,7 +10,6 @@ import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 import Portal from '@burstware/react-native-portal';
-import { PopupMenuOption } from '../../molecules/popup-menu/PopupMenu';
 
 
 const TaskManager: React.FC = () => {
@@ -48,12 +47,17 @@ const TaskManager: React.FC = () => {
         let storage = getStorage();
         storage.getTask(id).then(task => {
             if (task) {
-                if (task.children.length === 0) {
-                    storage.toggleTask(task.id)
-                    .then(task => setChildren(childTasks.map(t => t.id === task.id ? task : t)))
-                } else {
-                    setHistory([...history, task])
-                }
+                storage.toggleTask(task.id)
+                .then(task => setChildren(childTasks.map(t => t.id === task.id ? task : t)))
+            }
+        });
+    }
+
+    const informationPressed = (id: string) => {
+        let storage = getStorage();
+        storage.getTask(id).then(task => {
+            if (task) {
+                setHistory([...history, task])
             }
         });
     }
@@ -119,14 +123,16 @@ const TaskManager: React.FC = () => {
                     style={TaskList}
                     data={childTasks} renderItem={({item}) => {
                         return (
-                            <ChildTask activeOpacity={0} underlayColor={'white'} onPress={() => taskPressed(item.id)}>
-                            <TaskCard 
-                                name={item.name}
-                                description={getDescription(item.children.length)} 
-                                completion={item.percentCompleted}
-                                onDeleted={() => onTaskDeleted(item.id)}    
-                            />
-                        </ChildTask>
+                            <ChildTask>
+                                <TaskCard 
+                                    name={item.name}
+                                    description={getDescription(item.children.length)} 
+                                    completion={item.percentCompleted}
+                                    onDeleted={() => onTaskDeleted(item.id)}   
+                                    onInformationSelected={() => informationPressed(item.id)} 
+                                    onProgressSelected={() => taskPressed(item.id)}
+                                />
+                            </ChildTask>
                     )
                 }}/>
             </TaskArea>

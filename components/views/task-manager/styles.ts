@@ -20,17 +20,16 @@ export const TaskFilter = styled.TextInput`
     border-radius: 7px;
 `
 
-export const ChildTask = styled.TouchableHighlight`
-    margin-bottom: 16px;
-    border-radius: 14px;
+export const ChildTask = styled.View`
     padding: 0 24px;
+    margin-bottom: 24px;
 `
 
 export const TaskArea = styled.SafeAreaView`
     flex: 5;
 `
 
-export const TaskList: StyleProp<ViewStyle> = { paddingVertical: 24, marginVertical: 12, marginHorizontal: -24}
+export const TaskList: StyleProp<ViewStyle> = { paddingVertical: 24, marginVertical: 12, marginHorizontal: -24 }
 
 export const History: StyleProp<ViewStyle> = { flex: 2, overflow: 'hidden', marginBottom: 10 }
 

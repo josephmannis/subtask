@@ -110,11 +110,14 @@ async function getPercentCompleted(id: string): Promise<number> {
 
 async function toggleTask(id: string): Promise<ITask> {
     let persisted: IPersistedTask = await getPersisted(id);
-    await AsyncStorage.setItem(persisted.id, JSON.stringify({...persisted, completed: !persisted.completed}));
-    await updateParent(persisted.parentId);
-    
-    // need to toggle all children?
+    await setTaskStatus(id, !persisted.completed)
     return getTask(id);
+}
+
+async function setTaskStatus(id: string, completed: boolean): Promise<void> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    await AsyncStorage.setItem(persisted.id, JSON.stringify({...persisted, completed: completed}));
+    await Promise.all(persisted.children.map(id => toggleTask(id)));
 }
 
 async function updateParent(id?: string): Promise<void> {

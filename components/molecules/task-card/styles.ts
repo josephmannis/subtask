@@ -15,7 +15,6 @@ export const InformationWrapper = styled.View`
     align-items: center;
     flex: 2;
     padding: 0 8px;
-
 `
 
 export const Information = styled.View`
