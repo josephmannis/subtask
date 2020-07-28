@@ -15,7 +15,10 @@ export const InformationWrapper = styled.View`
     align-items: center;
     flex: 2;
     padding: 0 8px;
+`
 
+export const InformationTouchable = styled.TouchableOpacity`
+    
 `
 
 export const Information = styled.View`
