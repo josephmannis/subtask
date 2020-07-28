@@ -1,8 +1,9 @@
 import React from 'react';
-import { Description, Name, Information, Content, InformationWrapper, InformationTouchable } from './styles';
+import { Description, Name, Information, Content, InformationWrapper } from './styles';
 import CompletionChart from '../completion-chart/CompletionChart';
 import Card from '../../atoms/card/Card';
 import PopupMenu, { PopupMenuOption } from '../popup-menu/PopupMenu';
+import { TouchableOpacity } from 'react-native';
 
 interface ITaskCardProps {
     name: string;
@@ -17,11 +18,11 @@ const TaskCard: React.FC<ITaskCardProps> = ({name, description, onDeleted, onPro
     return (
         <Card>
             <Content>
-                <InformationTouchable activeOpacity={.4} onPress={onProgressSelected}>
+                <TouchableOpacity activeOpacity={.4} onPress={onProgressSelected}>
                     <CompletionChart percentCompleted={completion}/>
-                </InformationTouchable>
+                </TouchableOpacity>
                 <InformationWrapper>
-                    <InformationTouchable activeOpacity={.4} onPress={onInformationSelected}>
+                    <TouchableOpacity activeOpacity={.4} onPress={onInformationSelected}>
                         <Information>
                             <Name>
                                 {name}
@@ -30,7 +31,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({name, description, onDeleted, onPro
                                 {description}    
                             </Description> 
                         </Information>
-                    </InformationTouchable>
+                    </TouchableOpacity>
                     <PopupMenu>
                         <PopupMenuOption text='Delete task' onSelect={onDeleted}/>
                     </PopupMenu>

@@ -17,10 +17,6 @@ export const InformationWrapper = styled.View`
     padding: 0 8px;
 `
 
-export const InformationTouchable = styled.TouchableOpacity`
-    
-`
-
 export const Information = styled.View`
     display: flex;
     flex-direction: column;
