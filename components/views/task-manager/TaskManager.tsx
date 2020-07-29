@@ -10,6 +10,7 @@ import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 import Portal from '@burstware/react-native-portal';
+import { debounce } from '../../../util/debounce';
 
 
 const TaskManager: React.FC = () => {
@@ -89,9 +90,20 @@ const TaskManager: React.FC = () => {
         .then(() => setChildren(childTasks.filter(t => t.id !== id)))
     }
 
+    const onTitleChanged = (text: string) => {
+        if (selectedTask) {
+            let storage = getStorage();
+            storage.editTaskName(selectedTask.id, text)
+            .then(task => {
+                setTask(task);
+                setHistory(history.map(t => t.id === selectedTask.id ? task : t))
+            })
+        }
+    }
+
     return (
         <Page>
-            <TaskName editable={selectedTask !== undefined}>
+            <TaskName editable={selectedTask !== undefined} onChangeText={(text) => onTitleChanged(text)}>
                 {selectedTask ? selectedTask.name : 'Tasks'}
             </TaskName>
             { history.length !== 0 &&
