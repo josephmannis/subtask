@@ -12,6 +12,7 @@ interface ITaskStorage {
     toggleTask: (id: string) => Promise<ITask>;
     createTask: (name: string, parentId?: string) => Promise<ITask>
     deleteTask: (id: string) => Promise<void>;
+    editTaskName: (id: string, name: string) => Promise<ITask>;
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
@@ -25,7 +26,8 @@ export default function getStorage(): ITaskStorage {
         init: init,
         createTask: createTask,
         toggleTask: toggleTask,
-        deleteTask: deleteTask
+        deleteTask: deleteTask,
+        editTaskName: editTaskName,
     }
 }
 
@@ -193,4 +195,15 @@ async function addRoot(id: string): Promise<void> {
 
 async function save(task: IPersistedTask): Promise<void> {
     AsyncStorage.setItem(task.id, JSON.stringify(task))
+}
+
+async function editTaskName(id: string, name: string): Promise<ITask> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    let updated = {
+        ...persisted,
+        name: name
+    }
+    await save(updated);
+
+    return await getTask(id);
 }
