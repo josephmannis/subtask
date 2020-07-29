@@ -10,5 +10,5 @@
     "strict": true
   },
   "typeRoots": [ "./lib/", "./node_modules/@types"],
-  "exclude": ["node_modules", "./lib"]
+  "exclude": ["node_modules", "./lib", "jest.config.js"]
 }
