@@ -6,5 +6,17 @@ module.exports = {
     },
     testMatch: [
       "**/*.test.ts?(x)"
+    ],
+    setupFiles: ["./test/init.js"],
+    transformIgnorePatterns: [
+      "node_modules/(?!("
+      + "jest-)?react-native"
+      + "|react-(native|universal|navigation)-(.*)"
+      + "|@react-native-community/(.*)"
+      + "|@react-navigation/(.*)"
+      + "|expo-random/(.*)"
+      + "|nanoid/(.*)"
+      + "|@unimodules/(.*)"
+      + "|bs-platform)"
     ]
   };

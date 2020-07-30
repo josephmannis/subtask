@@ -1,7 +1,7 @@
 import { ITask } from "../lib/client";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { IPersistedTask } from "../lib/api";
-import { nanoid } from 'nanoid/async/index'
+import { nanoid } from 'nanoid/async/index';
 
 const ROOT_KEY = 'ROOTS'
 
@@ -59,6 +59,12 @@ async function getRoots(): Promise<string[]> {
 async function setRoots(ids: string[]): Promise<string[]> {
     await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(ids));
     return ids;
+}
+
+async function addRoot(id: string): Promise<void> {
+    let roots = await getRoots();
+    roots = [...roots, id]
+    await setRoots(roots)
 }
 
 async function getTask(id: string): Promise<ITask> {
@@ -181,15 +187,6 @@ async function createTask(name: string, parentId?: string): Promise<ITask> {
     return {
         ...task,
         percentCompleted: 0
-    }
-}
-
-async function addRoot(id: string): Promise<void> {
-    let roots = await AsyncStorage.getItem(ROOT_KEY);
-    if (roots) {
-        let parsed: string[] = JSON.parse(roots);
-        parsed = [...parsed, id]
-        await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(parsed))
     }
 }
 
