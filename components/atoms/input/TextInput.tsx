@@ -5,6 +5,7 @@ export const Input = styled.TextInput`
     padding: 12px;
     background-color: #E8E8E8;
     border-radius: 7px;
+    flex: 1;
 `
 
 export const InputLabel = styled.Text`
