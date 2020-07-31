@@ -10,7 +10,6 @@ import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 import Portal from '@burstware/react-native-portal';
-import { debounce } from '../../../util/debounce';
 
 
 const TaskManager: React.FC = () => {
@@ -101,6 +100,10 @@ const TaskManager: React.FC = () => {
         }
     }
 
+    const getFilteredChildren = () => {
+        return childTasks;
+    }
+
     return (
         <Page>
             <TaskName editable={selectedTask !== undefined} onChangeText={(text) => onTitleChanged(text)}>
@@ -133,7 +136,7 @@ const TaskManager: React.FC = () => {
             <TaskArea>
                 <FlatList 
                     style={TaskList}
-                    data={childTasks} renderItem={({item}) => {
+                    data={getFilteredChildren()} renderItem={({item}) => {
                         return (
                             <ChildTask>
                                 <TaskCard 
