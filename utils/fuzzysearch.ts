@@ -12,8 +12,9 @@ function shareCharacters(s1: string, s2: string): boolean {
     }
 
     let superSet = new Set(superSetStr)
-    let shareAll = true;
     
+    let shareAll = true;
+
     for (let i = 0; i < subSetStr.length; i++) shareAll = shareAll && superSet.has(subSetStr.charAt(i));
     return shareAll;
 }
