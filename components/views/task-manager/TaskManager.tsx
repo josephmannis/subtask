@@ -10,6 +10,7 @@ import Divider from '../../atoms/divider/Divider';
 import FloatingActionButton from '../../atoms/button/FloatingActionButton';
 import NewTaskModal from '../../organisms/new-task-modal/NewTaskModal';
 import Portal from '@burstware/react-native-portal';
+import fuzzysearch from '../../../utils/fuzzysearch';
 
 
 const TaskManager: React.FC = () => {
@@ -41,6 +42,8 @@ const TaskManager: React.FC = () => {
             setChildren(children)
             setTask(task)
         });
+        
+        setQuery('')
     }, [history])
 
     const taskPressed = (id: string) => {
@@ -101,7 +104,8 @@ const TaskManager: React.FC = () => {
     }
 
     const getFilteredChildren = () => {
-        return childTasks;
+        if (childQuery === '') return childTasks;
+        return childTasks.filter(task => fuzzysearch(childQuery, task.name));
     }
 
     return (
