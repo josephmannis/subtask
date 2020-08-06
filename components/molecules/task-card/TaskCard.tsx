@@ -4,31 +4,33 @@ import CompletionChart from '../completion-chart/CompletionChart';
 import Card from '../../atoms/card/Card';
 import PopupMenu, { PopupMenuOption } from '../popup-menu/PopupMenu';
 import { TouchableOpacity } from 'react-native';
+import { ITaskFragment } from '../../../lib/client';
 
 interface ITaskCardProps {
-    name: string;
-    description: string;
-    completion: number;
+    task: ITaskFragment;
     onDeleted: () => void;
-    onProgressSelected: () => void;
-    onInformationSelected: () => void;
+    onToggled: () => void;
+    onSelected: () => void;
 }
 
-const TaskCard: React.FC<ITaskCardProps> = ({name, description, onDeleted, onProgressSelected, onInformationSelected, completion}) => {
+const TaskCard: React.FC<ITaskCardProps> = ({ task, onDeleted, onToggled, onSelected }) => {
+    const getDescription = (numChildren: number) => `${numChildren === 0 ? 'No' : numChildren} subtasks`
+
+
     return (
         <Card>
             <Content>
-                <TouchableOpacity activeOpacity={.4} onPress={onProgressSelected}>
-                    <CompletionChart percentCompleted={completion}/>
+                <TouchableOpacity activeOpacity={.4} onPress={onToggled}>
+                    <CompletionChart percentCompleted={task.percentCompleted}/>
                 </TouchableOpacity>
                 <InformationWrapper>
-                    <TouchableOpacity activeOpacity={.4} onPress={onInformationSelected}>
+                    <TouchableOpacity activeOpacity={.4} onPress={onSelected}>
                         <Information>
                             <Name>
-                                {name}
+                                {task.name}
                             </Name>
                             <Description>
-                                {description}    
+                                {getDescription(task.children.length)}    
                             </Description> 
                         </Information>
                     </TouchableOpacity>

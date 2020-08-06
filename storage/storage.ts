@@ -7,18 +7,18 @@ const ROOT_KEY = 'ROOTS'
 
 interface ITaskFragmentStorage {
     getTopLevelTasks: () => Promise<ITaskFragment[]>;
-    getTask: (id: string) => Promise<ITaskFragment>;
-    getChildren: (id: string) => Promise<ITaskFragment[]>;
-    toggleTask: (id: string) => Promise<ITaskFragment>;
-    createTask: (name: string, parentId?: string) => Promise<ITaskFragment>
+    getTask: (id: string) => Promise<IResolvedTask>;
+    getChildren: (id: string) => Promise<IResolvedTask[]>;
+    toggleTask: (id: string) => Promise<IResolvedTask>;
+    createTask: (name: string, parentId?: string) => Promise<IResolvedTask>
     deleteTask: (id: string) => Promise<void>;
-    editTaskName: (id: string, name: string) => Promise<ITaskFragment>;
+    editTaskName: (id: string, name: string) => Promise<IResolvedTask>;
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
 // Or maybe we just get the whole ass thing once, and then just move around on the in-memory tree?
 
-export default function getStorage(): ITaskFragmentStorage {
+export default function useStorage(): ITaskFragmentStorage {
     return {
         getTopLevelTasks: getTopLevelTasks,
         getTask: getTask,
