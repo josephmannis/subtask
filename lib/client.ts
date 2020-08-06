@@ -1,3 +1,6 @@
+import { StackScreenProps } from "@react-navigation/stack"
+import { RouteProp } from "@react-navigation/native"
+
 export interface ITask {
     id: string; // ID of task
     name: string; // Name of task
@@ -11,3 +14,13 @@ export interface ITaskFragment extends ITask {
 export interface IResolvedTask extends ITask {
     children: ITaskFragment[]; // List of resolved tasks
 }
+
+export type ITaskNavigationParameters = {
+    Task: ({
+        id: string;
+        label: string;
+    } | undefined)
+}
+
+export type ITaskRouteProps = RouteProp<ITaskNavigationParameters, 'Task'> 
+export type ITaskNavigatorProps = StackScreenProps<ITaskNavigationParameters, 'Task'>

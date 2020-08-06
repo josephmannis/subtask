@@ -14,10 +14,10 @@ interface DisconnectedTaskViewProps {
     title: string;
     tasks: ITaskFragment[];    
     titleEditable?: boolean;
-    history: {id: string, label: string}[];
+    // history: {id: string, label: string}[];
     onTitleEdited?: (name: string) => void;
-    onHomePressed: () => void;
-    onHistoryItemSelected: (id: string) => void;
+    // onHomePressed: () => void;
+    // onHistoryItemSelected: (id: string) => void;
     onTaskCreated: (name: string) => void;
     onTaskDeleted: (id: string) => void;
     onTaskSelected: (id: string) => void;
@@ -25,7 +25,7 @@ interface DisconnectedTaskViewProps {
 }
 
 const DisconnectedTaskView: React.FC<DisconnectedTaskViewProps> = props => {
-    const { title, tasks, titleEditable, history, onHistoryItemSelected, onHomePressed, onTaskCreated, onTaskDeleted, onTaskSelected, onTaskToggled, onTitleEdited } = props;
+    const { title, tasks, titleEditable, onTaskCreated, onTaskDeleted, onTaskSelected, onTaskToggled, onTitleEdited } = props;
     const [ childQuery, setQuery ] = React.useState('');
     const [ showCreation, toggleCreation ] = React.useState(false);
 
@@ -39,12 +39,12 @@ const DisconnectedTaskView: React.FC<DisconnectedTaskViewProps> = props => {
             <TaskName editable={titleEditable} onChangeText={(text) => { if (onTitleEdited) onTitleEdited(text) }}>
                 {title}
             </TaskName>
-
+{/* 
             <TaskHistory
                 history={history.map(t => { return { id: t.id, label: t.label } })}
                 onHomePressed={onHomePressed}
                 onHistoryItemSelected={onHistoryItemSelected}
-            />
+            /> */}
 
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)} />
 

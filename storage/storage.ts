@@ -7,12 +7,12 @@ const ROOT_KEY = 'ROOTS'
 
 interface ITaskFragmentStorage {
     getTopLevelTasks: () => Promise<ITaskFragment[]>;
-    getTask: (id: string) => Promise<IResolvedTask>;
-    getChildren: (id: string) => Promise<IResolvedTask[]>;
-    toggleTask: (id: string) => Promise<IResolvedTask>;
-    createTask: (name: string, parentId?: string) => Promise<IResolvedTask>
+    getTask: (id: string) => Promise<ITaskFragment>;
+    getChildren: (id: string) => Promise<ITaskFragment[]>;
+    toggleTask: (id: string) => Promise<ITaskFragment>;
+    createTask: (name: string, parentId?: string) => Promise<ITaskFragment>
     deleteTask: (id: string) => Promise<void>;
-    editTaskName: (id: string, name: string) => Promise<IResolvedTask>;
+    editTaskName: (id: string, name: string) => Promise<ITaskFragment>;
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
