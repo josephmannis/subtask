@@ -3,18 +3,18 @@ import { FlatList } from 'react-native';
 import { HistoryContent, HistoryHome, History } from './style';
 import Tag from '../../atoms/tag/Tag';
 import Divider from '../../atoms/divider/Divider';
+import { ITaskHistoryItem } from '../../../lib/client';
 
 
 interface ITaskHistoryProps {
-    history: { id: string, label: string }[];
-
+    history: ITaskHistoryItem[];
     onHomePressed: () => void;
-    onHistoryItemSelected: (id: string) => void;
+    onHistoryItemSelected: (task: ITaskHistoryItem) => void;
 }
 
 const TaskHistory: React.FC<ITaskHistoryProps> = ({history, onHomePressed, onHistoryItemSelected}) => {
     const taskList = React.useRef<FlatList>(null);
-
+    console.log(history)
     return (
         <FlatList
             ref={taskList}
@@ -33,7 +33,7 @@ const TaskHistory: React.FC<ITaskHistoryProps> = ({history, onHomePressed, onHis
                     </HistoryHome>
                 )
             }}
-            renderItem={({ item }) => <Tag onPress={() => onHistoryItemSelected(item.id)} text={item.name} />}
+            renderItem={({ item }) => <Tag onPress={() => onHistoryItemSelected(item)} text={item.label} />}
         />
     )
 }

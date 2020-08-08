@@ -1,8 +1,8 @@
 import React from 'react';
-import { ITaskFragment, ITaskRouteProps } from '../../../lib/client';
+import { ITaskFragment, ITaskRouteProps, ITaskNavigationParameters, ITaskHistoryItem } from '../../../lib/client';
 import useStorage from '../../../storage/storage';
 import DisconnectedTaskView from '../../views/task-manager/TaskView';
-import { useNavigation, useRoute, useFocusEffect, StackActions } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect, StackActions, useNavigationState, NavigationState, NavigationProp, Route } from '@react-navigation/native';
 import Content from '../../templates/content/Content';
 
 
@@ -12,32 +12,28 @@ const TaskManager: React.FC = () => {
     const storage = useStorage();
     const navigation = useNavigation();
     const route = useRoute<ITaskRouteProps>();
+    const history = useNavigationState<(ITaskHistoryItem | undefined)[]>(state => state.routes.map(r => r.params as ITaskHistoryItem))
 
-    useFocusEffect(
-        React.useCallback(() => {
-            if (route.params) {
-                console.log(route.params.id)
-                storage.getTask(route.params.id)
-                .then(task => setTask(task))
-            } else {
-                console.log('Setting root')
-                setTask(undefined)
-            }
-    }, []))
+    useFocusEffect(React.useCallback(() => refresh(), []))
 
     React.useEffect(() => {
-        console.log('I get called')
         if (selectedTask) {
-            console.log('whats up')
             storage.getChildren(selectedTask.id)
                 .then(tasks => setListedTasks(tasks))
+        }
+    }, [selectedTask])
+
+    const refresh = () => {
+        if (route.params) {
+            storage.getTask(route.params.id)
+                .then(task => setTask(task))
         } else {
-            console.log('getting top levels')
+            setTask(undefined);
             storage.getTopLevelTasks()
                 .then(tasks => { setListedTasks(tasks) })
                 .catch(err => console.log(err))
         }
-    }, [selectedTask])
+    }
 
     const taskToggled = (id: string) => {
         storage.getTask(id).then(task => {
@@ -48,17 +44,22 @@ const TaskManager: React.FC = () => {
         });
     }
 
-    const taskSelected = (id: string) => {
-        const pushAction = StackActions.push('Task', { id: id, label: 'test' });
+    const taskSelected = (task: ITaskFragment) => {
+        // console.log(task)
+        const pushAction = StackActions.push('Task', { id: task.id, label: task.name });
         navigation.dispatch(pushAction)
     }
 
-    const historyItemPressed = (id: string) => {
+    const historyItemPressed = (task: ITaskHistoryItem) => {
+        // console.log(task)
         // if (id === selectedTask?.id) return
         // let historyItem = history.findIndex(v => v.id === id) + 1
     }
 
     const homePressed = () => {
+        let hist = navigation.dangerouslyGetState().routes.map(r => r.params as ITaskHistoryItem)
+
+        console.log(hist)
         // setHistory([]);
         // fetchRoot();
     }
@@ -84,6 +85,15 @@ const TaskManager: React.FC = () => {
         }
     }
 
+    const getHistory = (): ITaskHistoryItem[] => {
+        let hist = navigation.dangerouslyGetState().routes.map(r => r.params as ITaskHistoryItem)
+        // console.log(hist)
+        let routes: ITaskHistoryItem[] = []
+        hist.forEach(item => {if (item !== undefined) routes.push(item)})
+        // console.log(routes)
+        return routes;
+    }
+
     return (
         <Content>
 
@@ -91,9 +101,10 @@ const TaskManager: React.FC = () => {
             title={selectedTask ? selectedTask.name : 'Tasks'}
             titleEditable={selectedTask ? true : false}
             tasks={listedTasks}
-            // history={history}
+            history={getHistory()}
+            onHistoryItemSelected={historyItemPressed}
             onTitleEdited={onTitleChanged}
-            // onHomePressed={homePressed}
+            onHomePressed={homePressed}
             onTaskCreated={onTaskCreated}
             onTaskDeleted={taskDeleted}
             onTaskSelected={taskSelected}

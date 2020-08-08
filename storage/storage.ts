@@ -32,13 +32,13 @@ export default function useStorage(): ITaskFragmentStorage {
 }
 
 async function init(): Promise<void> {
-    // await AsyncStorage.clear()
-    // await save({name: 'Eggs', id: 'Eggs', parentId: 'Dairy', completed: false, children: []})
-    // await save({name: 'Cheese', id: 'Cheese', parentId: 'Dairy', completed: false, children: []})
-    // await save({name: 'Dairy', id: 'Dairy', parentId: 'Groceries', completed: false, children: ['Cheese', 'Eggs']})
-    // await save({name: 'Lettuce', id: 'Lettuce', parentId: 'Groceries', completed: true, children: []})
-    // await save({name: 'Groceries', id: 'Groceries', completed: false, children: ['Lettuce', 'Dairy']})
-    // await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(['Groceries']))
+    await AsyncStorage.clear()
+    await save({name: 'Eggs', id: 'Eggs', parentId: 'Dairy', completed: false, children: []})
+    await save({name: 'Cheese', id: 'Cheese', parentId: 'Dairy', completed: false, children: []})
+    await save({name: 'Dairy', id: 'Dairy', parentId: 'Groceries', completed: false, children: ['Cheese', 'Eggs']})
+    await save({name: 'Lettuce', id: 'Lettuce', parentId: 'Groceries', completed: true, children: []})
+    await save({name: 'Groceries', id: 'Groceries', completed: false, children: ['Lettuce', 'Dairy']})
+    await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(['Groceries']))
 }
 
 async function getTopLevelTasks(): Promise<ITaskFragment[]> {

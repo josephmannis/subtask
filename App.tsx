@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import TaskManager from './components/connector/task-manager/TaskManager';
-import Content from './components/templates/content/Content';
 import Portal from '@burstware/react-native-portal';
 import { MenuProvider } from 'react-native-popup-menu';
 import 'react-native-gesture-handler';

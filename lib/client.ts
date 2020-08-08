@@ -15,11 +15,13 @@ export interface IResolvedTask extends ITask {
     children: ITaskFragment[]; // List of resolved tasks
 }
 
+export interface ITaskHistoryItem {
+    id: string;
+    label: string;
+}
+
 export type ITaskNavigationParameters = {
-    Task: ({
-        id: string;
-        label: string;
-    } | undefined)
+    Task: (ITaskHistoryItem | undefined)
 }
 
 export type ITaskRouteProps = RouteProp<ITaskNavigationParameters, 'Task'> 
