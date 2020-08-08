@@ -14,7 +14,6 @@ interface ITaskHistoryProps {
 
 const TaskHistory: React.FC<ITaskHistoryProps> = ({history, onHomePressed, onHistoryItemSelected}) => {
     const taskList = React.useRef<FlatList>(null);
-    console.log(history)
     return (
         <FlatList
             ref={taskList}

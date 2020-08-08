@@ -45,23 +45,20 @@ const TaskManager: React.FC = () => {
     }
 
     const taskSelected = (task: ITaskFragment) => {
-        // console.log(task)
         const pushAction = StackActions.push('Task', { id: task.id, label: task.name });
         navigation.dispatch(pushAction)
     }
 
     const historyItemPressed = (task: ITaskHistoryItem) => {
-        // console.log(task)
-        // if (id === selectedTask?.id) return
-        // let historyItem = history.findIndex(v => v.id === id) + 1
+        let hist = getHistory()
+        let position = hist.length - (hist.findIndex(item => item.id === task.id) + 1)
+        const pushAction = StackActions.pop(position)
+        navigation.dispatch(pushAction)
     }
 
     const homePressed = () => {
-        let hist = navigation.dangerouslyGetState().routes.map(r => r.params as ITaskHistoryItem)
-
-        console.log(hist)
-        // setHistory([]);
-        // fetchRoot();
+        const pushAction = StackActions.popToTop()
+        navigation.dispatch(pushAction)
     }
 
     const onTaskCreated = (name: string) => {
@@ -80,36 +77,33 @@ const TaskManager: React.FC = () => {
             storage.editTaskName(selectedTask.id, text)
             .then(task => {
                 setTask(task);
+                navigation.setParams({id: task.id, label: text})
                 // setHistory(history.map(t => t.id === selectedTask.id ? task : t))
             })
         }
     }
 
     const getHistory = (): ITaskHistoryItem[] => {
-        let hist = navigation.dangerouslyGetState().routes.map(r => r.params as ITaskHistoryItem)
-        // console.log(hist)
         let routes: ITaskHistoryItem[] = []
-        hist.forEach(item => {if (item !== undefined) routes.push(item)})
-        // console.log(routes)
+        history.forEach(item => {if (item !== undefined) routes.push(item)})
         return routes;
     }
 
     return (
         <Content>
-
-        <DisconnectedTaskView 
-            title={selectedTask ? selectedTask.name : 'Tasks'}
-            titleEditable={selectedTask ? true : false}
-            tasks={listedTasks}
-            history={getHistory()}
-            onHistoryItemSelected={historyItemPressed}
-            onTitleEdited={onTitleChanged}
-            onHomePressed={homePressed}
-            onTaskCreated={onTaskCreated}
-            onTaskDeleted={taskDeleted}
-            onTaskSelected={taskSelected}
-            onTaskToggled={taskToggled}
-        />
+            <DisconnectedTaskView 
+                title={selectedTask ? selectedTask.name : 'Tasks'}
+                titleEditable={selectedTask ? true : false}
+                tasks={listedTasks}
+                history={getHistory()}
+                onHistoryItemSelected={historyItemPressed}
+                onTitleEdited={onTitleChanged}
+                onHomePressed={homePressed}
+                onTaskCreated={onTaskCreated}
+                onTaskDeleted={taskDeleted}
+                onTaskSelected={taskSelected}
+                onTaskToggled={taskToggled}
+            />
         </Content>
 
     )
