@@ -1,8 +1,8 @@
 import React from 'react';
-import { ITaskFragment, ITaskRouteProps, ITaskNavigationParameters, ITaskHistoryItem } from '../../../lib/client';
+import { ITaskFragment, ITaskRouteProps, ITaskHistoryItem } from '../../../lib/client';
 import useStorage from '../../../storage/storage';
 import DisconnectedTaskView from '../../views/task-manager/TaskView';
-import { useNavigation, useRoute, useFocusEffect, StackActions, useNavigationState, NavigationState, NavigationProp, Route } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect, StackActions, useNavigationState } from '@react-navigation/native';
 import Content from '../../templates/content/Content';
 
 
@@ -78,7 +78,6 @@ const TaskManager: React.FC = () => {
             .then(task => {
                 setTask(task);
                 navigation.setParams({id: task.id, label: text})
-                // setHistory(history.map(t => t.id === selectedTask.id ? task : t))
             })
         }
     }
