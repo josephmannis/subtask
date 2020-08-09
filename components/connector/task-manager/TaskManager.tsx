@@ -39,7 +39,7 @@ const TaskManager: React.FC = () => {
         storage.getTask(id).then(task => {
             if (task) {
                 storage.toggleTask(task.id)
-                .then(task => setTask(task))
+                .then(() => refresh())
             }
         });
     }
