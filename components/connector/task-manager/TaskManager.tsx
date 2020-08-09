@@ -63,7 +63,7 @@ const TaskManager: React.FC = () => {
 
     const onTaskCreated = (name: string) => {
         storage.createTask(name, selectedTask?.id)
-        .then(task => setTask(task))
+        .then(() => refresh())
         .catch(err => console.log(err))
     }
 

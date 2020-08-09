@@ -3,7 +3,7 @@ import { StyleProp, ViewStyle, TextStyle } from "react-native";
 export const Content: StyleProp<ViewStyle> = { 
     borderRadius: 14,
     padding: 24,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
 }
 
 export const Title: StyleProp<TextStyle> = { 
