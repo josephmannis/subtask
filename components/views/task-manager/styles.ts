@@ -29,8 +29,6 @@ export const TaskArea = styled.SafeAreaView`
     flex: 5;
 `
 
-export const TaskList: StyleProp<ViewStyle> = { paddingVertical: 24, marginVertical: 12, marginHorizontal: -24 }
-
 export const History: StyleProp<ViewStyle> = { flex: 2, overflow: 'hidden', marginBottom: 10 }
 
 export const HistoryContent: StyleProp<ViewStyle> = {display: 'flex', alignItems: 'center', marginVertical: 24}
