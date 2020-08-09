@@ -37,13 +37,26 @@ async function init(): Promise<void> {
     await save({ name: 'Cheese', id: 'Cheese', parentId: 'Dairy', percentCompleted: 0, children: []})
     await save({ name: 'Dairy', id: 'Dairy', parentId: 'Groceries', percentCompleted: 0, children: ['Cheese', 'Eggs']})
     await save({ name: 'Lettuce', id: 'Lettuce', parentId: 'Groceries', percentCompleted: 1, children: []})
-    await save({ name: 'Groceries', id: 'Groceries', percentCompleted: 0, children: ['Lettuce', 'Dairy']})
+    await save({ name: 'Groceries', id: 'Groceries', percentCompleted: .5, children: ['Lettuce', 'Dairy']})
     await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(['Groceries']))
 }
 
 async function getTopLevelTasks(): Promise<ITaskFragment[]> {
     let roots = await getRoots();
     return getTasks(roots);
+}
+
+async function getTask(id: string): Promise<ITaskFragment> {
+    return await getPersisted(id);
+}
+
+async function getTasks(ids: string[]): Promise<ITaskFragment[]> {
+    return await Promise.all(ids.map(id => getTask(id)))
+}
+
+async function getChildren(id: string): Promise<ITaskFragment[]> {
+    let task: IPersistedTask = await getPersisted(id);
+    return getTasks(task.children);
 }
 
 async function getRoots(): Promise<string[]> {
@@ -67,19 +80,6 @@ async function addRoot(id: string): Promise<void> {
     await setRoots(roots)
 }
 
-async function getTask(id: string): Promise<ITaskFragment> {
-    return await getPersisted(id);
-}
-
-async function getChildren(id: string): Promise<ITaskFragment[]> {
-    let task: IPersistedTask = await getPersisted(id);
-    return getTasks(task.children);
-}
-
-async function getTasks(ids: string[]): Promise<ITaskFragment[]> {
-    return await Promise.all(ids.map(id => getTask(id)))
-}
-
 async function getPersisted(id: string): Promise<IPersistedTask> {
     let task: string | null = await AsyncStorage.getItem(id);
 
@@ -90,7 +90,33 @@ async function getPersisted(id: string): Promise<IPersistedTask> {
     throw Error(`No task with id ${id}`);
 }
 
-async function getPercentCompleted(id: string): Promise<number> {
+async function toggleTask(id: string): Promise<ITaskFragment> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    let newPercentCompleted = persisted.percentCompleted === 1 ? 0 : 1
+    await setTaskStatus(id, newPercentCompleted)
+    await updateParent(persisted.parentId)
+    return getTask(id);
+}
+
+async function setTaskStatus(id: string, percentCompleted: number): Promise<void> {
+    let persisted: IPersistedTask = await getPersisted(id);
+    await save({ ...persisted, percentCompleted: percentCompleted});
+    await Promise.all(persisted.children.map(id => setTaskStatus(id, percentCompleted)));
+}
+
+async function updateParent(id?: string): Promise<void> {
+    if (id) {
+        let persisted: IPersistedTask = await getPersisted(id);
+        let truePercentCompleted = await calculatePercentCompleted(id);
+        let cachedPercentCompleted = persisted.percentCompleted;
+        if (cachedPercentCompleted !== truePercentCompleted) {
+            await save({ ...persisted, percentCompleted: truePercentCompleted })
+            await updateParent(persisted.parentId)
+        }
+    }
+}
+
+async function calculatePercentCompleted(id: string): Promise<number> {
     let task: IPersistedTask = await getPersisted(id);
     let numChildren = task.children.length;
 
@@ -104,32 +130,6 @@ async function getPercentCompleted(id: string): Promise<number> {
     children.forEach(c => { if (c.percentCompleted === 1) numCompleted += 1 })
 
     return numCompleted / numChildren;
-}
-
-async function toggleTask(id: string): Promise<ITaskFragment> {
-    let persisted: IPersistedTask = await getPersisted(id);
-    let newPercentCompleted = persisted.percentCompleted === 1 ? 0 : 1
-    await setTaskStatus(id, newPercentCompleted)
-    await updateParent(persisted.parentId)
-    return getTask(id);
-}
-
-async function setTaskStatus(id: string, percentCompleted: number): Promise<void> {
-    let persisted: IPersistedTask = await getPersisted(id);
-    await AsyncStorage.setItem(persisted.id, JSON.stringify({ ...persisted, percentCompleted: percentCompleted}));
-    await Promise.all(persisted.children.map(id => setTaskStatus(id, percentCompleted)));
-}
-
-async function updateParent(id?: string): Promise<void> {
-    if (id) {
-        let persisted: IPersistedTask = await getPersisted(id);
-        let truePercentCompleted = await getPercentCompleted(id);
-        let cachedPercentCompleted = persisted.percentCompleted;
-        if (cachedPercentCompleted !== truePercentCompleted) {
-            await AsyncStorage.setItem(persisted.id, JSON.stringify({ ...persisted, percentCompleted: truePercentCompleted}));
-            await updateParent(persisted.parentId)
-        }
-    }
 }
 
 async function deleteTask(id: string): Promise<void> {

@@ -45,11 +45,13 @@ const DisconnectedTaskView: React.FC<DisconnectedTaskViewProps> = props => {
                 {title}
             </TaskName>
 
-            <TaskHistory
-                history={history.map(t => { return { id: t.id, label: t.label } })}
-                onHomePressed={onHomePressed}
-                onHistoryItemSelected={onHistoryItemSelected}
-            />
+            {history.length !== 0 && 
+                <TaskHistory
+                    history={history.map(t => { return { id: t.id, label: t.label } })}
+                    onHomePressed={onHomePressed}
+                    onHistoryItemSelected={onHistoryItemSelected}
+                />
+            }
 
             <SearchBar value={childQuery} onChange={(t) => setQuery(t)} />
 
