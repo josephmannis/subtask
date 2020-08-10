@@ -5,20 +5,20 @@ import { nanoid } from 'nanoid/async/index';
 
 const ROOT_KEY = 'ROOTS'
 
-interface ITaskFragmentStorage {
-    getTopLevelTasks: () => Promise<ITaskFragment[]>;
-    getTask: (id: string) => Promise<ITaskFragment>;
-    getChildren: (id: string) => Promise<ITaskFragment[]>;
-    toggleTask: (id: string) => Promise<ITaskFragment>;
-    createTask: (name: string, parentId?: string) => Promise<ITaskFragment>
+interface ITaskStorage {
+    getTopLevelTasks: () => Promise<IPersistedTask[]>;
+    getTask: (id: string) => Promise<IPersistedTask>;
+    getChildren: (id: string) => Promise<IPersistedTask[]>;
+    toggleTask: (id: string) => Promise<IPersistedTask>;
+    createTask: (name: string, parentId?: string) => Promise<IPersistedTask>
     deleteTask: (id: string) => Promise<void>;
-    editTaskName: (id: string, name: string) => Promise<ITaskFragment>;
+    editTaskName: (id: string, name: string) => Promise<IPersistedTask>;
     init(): Promise<void>;
 }
 // Add task fragment, so automatically resolve one level deep
 // Or maybe we just get the whole ass thing once, and then just move around on the in-memory tree?
 
-export default function useStorage(): ITaskFragmentStorage {
+export default function useStorage(): ITaskStorage {
     return {
         getTopLevelTasks: getTopLevelTasks,
         getTask: getTask,
@@ -41,20 +41,20 @@ async function init(): Promise<void> {
     await AsyncStorage.setItem(ROOT_KEY, JSON.stringify(['Groceries']))
 }
 
-async function getTopLevelTasks(): Promise<ITaskFragment[]> {
+async function getTopLevelTasks(): Promise<IPersistedTask[]> {
     let roots = await getRoots();
     return getTasks(roots);
 }
 
-async function getTask(id: string): Promise<ITaskFragment> {
+async function getTask(id: string): Promise<IPersistedTask> {
     return await getPersisted(id);
 }
 
-async function getTasks(ids: string[]): Promise<ITaskFragment[]> {
+async function getTasks(ids: string[]): Promise<IPersistedTask[]> {
     return await Promise.all(ids.map(id => getTask(id)))
 }
 
-async function getChildren(id: string): Promise<ITaskFragment[]> {
+async function getChildren(id: string): Promise<IPersistedTask[]> {
     let task: IPersistedTask = await getPersisted(id);
     return getTasks(task.children);
 }
@@ -90,7 +90,7 @@ async function getPersisted(id: string): Promise<IPersistedTask> {
     throw Error(`No task with id ${id}`);
 }
 
-async function toggleTask(id: string): Promise<ITaskFragment> {
+async function toggleTask(id: string): Promise<IPersistedTask> {
     let persisted: IPersistedTask = await getPersisted(id);
     let newPercentCompleted = persisted.percentCompleted === 1 ? 0 : 1
     await setTaskStatus(id, newPercentCompleted)
@@ -152,7 +152,7 @@ async function deleteChildren(id: string): Promise<void> {
     await Promise.all(persisted.children.map(c => deleteChildren(c)))
 }
 
-async function createTask(name: string, parentId?: string): Promise<ITaskFragment> {
+async function createTask(name: string, parentId?: string): Promise<IPersistedTask> {
     let task: IPersistedTask = {
         id: await nanoid(),
         name: name,
@@ -182,7 +182,7 @@ async function save(task: IPersistedTask): Promise<void> {
     AsyncStorage.setItem(task.id, JSON.stringify(task))
 }
 
-async function editTaskName(id: string, name: string): Promise<ITaskFragment> {
+async function editTaskName(id: string, name: string): Promise<IPersistedTask> {
     let persisted: IPersistedTask = await getPersisted(id);
     let updated = {
         ...persisted,
