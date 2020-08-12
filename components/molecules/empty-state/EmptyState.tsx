@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { EmptyStateHint, EmptyStateImage } from './styles';
+import { EmptyStateHint } from './styles';
 import { Image } from 'react-native';
 const emptyImage = require('../../../assets/empty-state-light.png')
 
