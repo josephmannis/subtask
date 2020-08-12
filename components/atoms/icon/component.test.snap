@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders arrow 1`] = `
+<Image
+  size="small"
+  source={1}
+  style={
+    Array [
+      Object {
+        "aspectRatio": 1,
+        "height": 20,
+        "resizeMode": "contain",
+        "width": 20,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Renders check 1`] = `
+<Image
+  size="small"
+  source={1}
+  style={
+    Array [
+      Object {
+        "aspectRatio": 1,
+        "height": 20,
+        "resizeMode": "contain",
+        "width": 20,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Renders kebab 1`] = `
+<Image
+  size="small"
+  source={1}
+  style={
+    Array [
+      Object {
+        "aspectRatio": 1,
+        "height": 20,
+        "resizeMode": "contain",
+        "width": 20,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Renders plus 1`] = `
+<Image
+  size="small"
+  source={1}
+  style={
+    Array [
+      Object {
+        "aspectRatio": 1,
+        "height": 20,
+        "resizeMode": "contain",
+        "width": 20,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Renders search 1`] = `
+<Image
+  size="small"
+  source={1}
+  style={
+    Array [
+      Object {
+        "aspectRatio": 1,
+        "height": 20,
+        "resizeMode": "contain",
+        "width": 20,
+      },
+    ]
+  }
+/>
+`;

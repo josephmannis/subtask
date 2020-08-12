@@ -1,0 +1,948 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1 correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 1 1 -0.004 -40 L 0 0 A 0 0 0 1 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M -0 -40 A 40 40 0 0 1 -0.004 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  >
+    <Image
+      size="small"
+      source={1}
+      style={
+        Array [
+          Object {
+            "aspectRatio": 1,
+            "height": 20,
+            "resizeMode": "contain",
+            "width": 20,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Renders negative numbers correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 0 1 0 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 1 1 -0.004 -40 L 0 0 A 0 0 0 1 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Renders numbers between zero and 1 correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 0 1 0 40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 40 A 40 40 0 0 1 -0.004 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "fontWeight": "800",
+          },
+        ]
+      }
+    >
+      50%
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Renders numbers greater than 1 correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 1 1 -0 -40 L 0 0 A 0 0 0 1 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M -0 -40 A 40 40 0 0 1 -0.004 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "fontWeight": "800",
+          },
+        ]
+      }
+    >
+      200%
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Renders zero correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 0 1 0 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 1 1 -0.004 -40 L 0 0 A 0 0 0 1 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Renders zero percent correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "justifyContent": "center",
+        "position": "relative",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 100,
+        "padding": 0,
+        "width": 100,
+      }
+    }
+  >
+    <RNSVGSvgView
+      bbHeight={100}
+      bbWidth={100}
+      focusable={false}
+      height={100}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+      width={100}
+    >
+      <RNSVGGroup>
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -16777216,
+                  1,
+                  -16777216,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="backgroundGradient"
+              x1={0}
+              x2={100}
+              y1={100}
+              y2={0}
+            />
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  452984831,
+                  1,
+                  16777215,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={1}
+              name="fillShadowGradient"
+              x1={0}
+              x2={0}
+              y1={0}
+              y2={100}
+            />
+          </RNSVGDefs>
+        </RNSVGGroup>
+        <RNSVGRect
+          height={100}
+          rx={0}
+          ry={0}
+          width="100%"
+          x={0}
+          y={0}
+        />
+        <RNSVGGroup
+          matrix={
+            Array [
+              1,
+              0,
+              -0,
+              1,
+              50,
+              50,
+            ]
+          }
+        >
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 0 1 0 -40 L 0 0 A 0 0 0 0 0 0 0 Z "
+              fill={4280329215}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M 0 -40 A 40 40 0 1 1 -0.004 -40 L 0 0 A 0 0 0 1 0 0 0 Z "
+              fill={4294506744}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "white",
+          "borderRadius": 500,
+          "display": "flex",
+          "elevation": 12,
+          "height": "58%",
+          "justifyContent": "center",
+          "position": "absolute",
+          "shadowColor": "black",
+          "shadowOpacity": 0.2,
+          "shadowRadius": 16,
+          "width": "58%",
+        },
+      ]
+    }
+  />
+</View>
+`;

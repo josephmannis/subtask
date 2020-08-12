@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "marginBottom": 0,
+        "marginLeft": 12,
+        "marginRight": 12,
+        "marginTop": 0,
+      },
+    ]
+  }
+>
+  <Image
+    size="small"
+    source={1}
+    style={
+      Array [
+        Object {
+          "aspectRatio": 1,
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+      ]
+    }
+  />
+</View>
+`;

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "bottom": 30,
+        "position": "absolute",
+        "right": 30,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#20A3FF",
+        "borderRadius": 150,
+        "elevation": 12,
+        "height": 68,
+        "justifyContent": "center",
+        "opacity": 1,
+        "shadowColor": "#20A3FF",
+        "shadowOpacity": 0.3,
+        "shadowRadius": 12,
+        "width": 68,
+      }
+    }
+  >
+    <Image
+      size="small"
+      source={1}
+      style={
+        Array [
+          Object {
+            "aspectRatio": 1,
+            "height": 20,
+            "resizeMode": "contain",
+            "width": 20,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;

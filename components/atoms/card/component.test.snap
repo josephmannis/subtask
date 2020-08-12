@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderRadius": 14,
+        "elevation": 12,
+        "shadowColor": "black",
+        "shadowOpacity": 0.15,
+        "shadowRadius": 12,
+      },
+    ]
+  }
+/>
+`;
