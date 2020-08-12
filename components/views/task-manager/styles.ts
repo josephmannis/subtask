@@ -38,4 +38,3 @@ export const HistoryHome = styled.View`
     flex-direction: row;
     align-items: center;
 `
-
