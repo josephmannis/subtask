@@ -15,8 +15,6 @@ interface ITaskStorage {
     editTaskName: (id: string, name: string) => Promise<IPersistedTask>;
     init(): Promise<void>;
 }
-// Add task fragment, so automatically resolve one level deep
-// Or maybe we just get the whole ass thing once, and then just move around on the in-memory tree?
 
 export default function useStorage(): ITaskStorage {
     return {

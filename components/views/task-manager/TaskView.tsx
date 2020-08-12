@@ -1,5 +1,5 @@
 import React from 'react';
-import { TaskName, Page, TaskArea } from './styles';
+import { TaskName, Page, TaskArea, NoTaskHint } from './styles';
 import SearchBar from '../../molecules/search-bar/SearchBar';
 import { ITaskFragment, ITaskHistoryItem } from '../../../lib/client';
 import TaskCard from '../../molecules/task-card/TaskCard';
@@ -9,6 +9,8 @@ import Portal from '@burstware/react-native-portal';
 import fuzzysearch from '../../../utils/fuzzysearch';
 import TaskHistory from '../../organisms/task-history/TaskHistory';
 import TaskList from '../../molecules/task-list/TaskList';
+import EmptyState from '../../molecules/empty-state/EmptyState';
+
 
 interface DisconnectedTaskViewProps {
     title: string;
@@ -53,7 +55,7 @@ const DisconnectedTaskView: React.FC<DisconnectedTaskViewProps> = props => {
                 />
             }
 
-            <SearchBar value={childQuery} onChange={(t) => setQuery(t)} />
+            { tasks.length !== 0 && <SearchBar value={childQuery} onChange={(t) => setQuery(t)} />}
 
             <TaskArea>
                 <TaskList
