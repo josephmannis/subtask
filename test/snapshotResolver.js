@@ -1,9 +1,11 @@
 module.exports = {
-    testPathForConsistencyCheck: 'some/example.test.js',
-
-    resolveSnapshotPath: (testPath, snapshotExtension) =>
-        testPath.replace(/\.test\.([tj]sx?)/, `${snapshotExtension}.$1`),
+resolveSnapshotPath: (testPath, snapshotExtension) =>
+    testPath
+    .replace(/.test.([tj]sx?)/, '.test' + snapshotExtension)
+    .replace(/src([/\\]components)/, '__snapshots__'),
 
     resolveTestPath: (snapshotFilePath, snapshotExtension) =>
-        snapshotFilePath.replace(snapshotExtension, '.test'),
+    snapshotFilePath.replace(snapshotExtension, '.js').replace('__snapshots__', 'src/components'),
+
+    testPathForConsistencyCheck: 'src/components/some.test.js',
 }
