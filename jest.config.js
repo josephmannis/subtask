@@ -18,5 +18,6 @@ module.exports = {
       + "|nanoid/(.*)"
       + "|@unimodules/(.*)"
       + "|bs-platform)"
-    ]
+    ],
+    snapshotResolver: './test/snapshotResolver.js'
   };

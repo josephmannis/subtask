@@ -2,7 +2,7 @@ import React from 'react';
 
 import renderer from 'react-test-renderer';
 import CompletionChart from './CompletionChart';
-import { shallow } from 'enzyme';
+// import { shallow } from 'enzyme';
 
 test('Renders zero percent correctly', () => {
     const tree = renderer.create(<CompletionChart percentCompleted={0}/>).toJSON();
@@ -34,9 +34,9 @@ test('Renders zero correctly', () => {
     expect(tree).toMatchSnapshot()
 })
 
-test('Renders changing numbers correctly', () => {
-    const tree = shallow(<CompletionChart percentCompleted={0}/>)
-    expect(tree).toMatchSnapshot()
-    tree.setProps({percentCompleted: .25})
-    expect(tree).toMatchSnapshot()
-})
+// test('Renders changing numbers correctly', () => {
+//     const tree = shallow(<CompletionChart percentCompleted={0}/>)
+//     expect(tree).toMatchSnapshot()
+//     tree.setProps({percentCompleted: .25})
+//     expect(tree).toMatchSnapshot()
+// })
