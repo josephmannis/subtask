@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "backgroundColor": "rgba(255,255,255,1.00)",
+      "borderBottomLeftRadius": "14px",
+      "borderBottomRightRadius": "14px",
+      "borderTopLeftRadius": "14px",
+      "borderTopRightRadius": "14px",
+      "boxShadow": "0px 0px 12px rgba(0,0,0,0.15)",
+    }
+  }
+/>
+`;
